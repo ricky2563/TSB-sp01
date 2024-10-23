@@ -1,0 +1,20 @@
+.sp01 {
+    position: absolute;
+    left: 100px;
+    width: 50px;
+    height: 50px;
+    background-color: #008080; /* Color for the SP01 (turquoise) */
+    transition: top 0.1s ease-in-out;
+    border-radius: 10px; /* Give the SP01 a more boat-like shape */
+  }
+  
+  /* SP01 in the top position (moving towards the top of the screen) */
+  .sp01.top {
+    top: 20px;
+  }
+  
+  /* SP01 in the bottom position (moving towards the bottom of the screen) */
+  .sp01.bottom {
+    top: 130px;
+  }
+  

@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #87ceeb; /* Cor do céu/água */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .score-border {
+    position: relative;
+    width: 870px; /* Slightly larger than the game area */
+    height: 270px; /* Slightly larger than the game area */
+    background-color: transparent; /* Make sure it's transparent so only the border shows */
+    border: 4px solid #000; /* Thicker border to make it more distinct */
+    display: flex; /* Centers the game area inside */
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* Optional padding inside the border */
+  }
+  
+  .game-area {
+    position: relative;
+    width: 800px;
+    height: 200px;
+    background-color: #1e90ff; /* Cor da água */
+    border: 2px solid #000;
+    overflow: hidden;
+  }
+  
+  
+  /* Texto de "Game Over" */
+  .game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: red;
+  }
+
+  /* Game.css */
+
+.score {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  font-family: 'Courier', monospace;
+}
+
+.max-score {
+  position: absolute;
+  top: 10px;
+  right: 220px;
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  font-family: 'Courier', monospace;
+}
+
+.pause-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: add background overlay */
+}
+
+.menu-options {
+  display: flex;
+  flex-direction: column; /* Stack the buttons vertically */
+  gap: 20px; /* Add some space between the buttons */
+}
+
+.pause-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.pause-button.continue {
+  background-color: #4CAF50; /* Continue button background color */
+  color: white;
+}
+
+/* Hover effect for buttons */
+.pause-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Styling the continue button specifically */
+.pause-button.continue {
+  background-color: #28a745; /* Green background */
+}
+
+/* Hover effect for the continue button */
+.pause-button.continue:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Styling the reset button specifically */
+.pause-button.reset {
+  background-color: #dc3545; /* Red background */
+}
+
+/* Hover effect for the reset button */
+.pause-button.reset:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+
+  
