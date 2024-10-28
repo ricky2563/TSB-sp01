@@ -1,68 +1,83 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #87ceeb; /* Cor do céu/água */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .score-border {
-    position: relative;
-    width: 870px; /* Slightly larger than the game area */
-    height: 270px; /* Slightly larger than the game area */
-    background-color: transparent; /* Make sure it's transparent so only the border shows */
-    border: 4px solid #000; /* Thicker border to make it more distinct */
-    display: flex; /* Centers the game area inside */
-    justify-content: center;
-    align-items: center;
-    padding: 10px; /* Optional padding inside the border */
-  }
-  
-  .game-area {
-    position: relative;
-    width: 800px;
-    height: 200px;
-    background-color: #1e90ff; /* Cor da água */
-    border: 2px solid #000;
-    overflow: hidden;
-  }
-  
-  
-  /* Texto de "Game Over" */
-  .game-over {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    color: red;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  /* Game.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #87ceeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-.score {
+.score-border {
+  position: relative;
+  width: 870px;
+  height: 270px;
+  background-color: transparent;
+  border: 4px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.game-area {
+  position: relative;
+  width: 800px;
+  height: 200px;
+  background-image: url('../images/background.jpg'); /* Your rolling background image */
+  background-size: cover;
+  background-repeat: repeat-x;
+  overflow: hidden;
+  border: 2px solid #000;
+  animation: scrollBackground 10s linear infinite;
+}
+
+@keyframes scrollBackground {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -800px;
+  }
+}
+
+.game-area.running {
+  animation-play-state: running;
+}
+
+.game-area.paused {
+  animation-play-state: paused;
+}
+
+/* Additional styles for game components */
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: red;
+}
+
+.score, .max-score {
   position: absolute;
   top: 10px;
-  right: 50px;
   font-size: 24px;
   color: rgb(0, 0, 0);
   font-family: 'Courier', monospace;
 }
 
+.score {
+  right: 50px;
+}
+
 .max-score {
-  position: absolute;
-  top: 10px;
   right: 220px;
-  font-size: 24px;
-  color: rgb(0, 0, 0);
-  font-family: 'Courier', monospace;
 }
 
 .pause-menu {
@@ -72,15 +87,15 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center; /* Centers horizontally */
-  align-items: center; /* Centers vertically */
-  background-color: rgba(0, 0, 0, 0.5); /* Optional: add background overlay */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .menu-options {
   display: flex;
-  flex-direction: column; /* Stack the buttons vertically */
-  gap: 20px; /* Add some space between the buttons */
+  flex-direction: column;
+  gap: 20px;
 }
 
 .pause-button {
@@ -94,35 +109,46 @@
 }
 
 .pause-button.continue {
-  background-color: #4CAF50; /* Continue button background color */
+  background-color: #28a745;
   color: white;
 }
 
-/* Hover effect for buttons */
-.pause-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-/* Styling the continue button specifically */
-.pause-button.continue {
-  background-color: #28a745; /* Green background */
-}
-
-/* Hover effect for the continue button */
 .pause-button.continue:hover {
-  background-color: #218838; /* Darker green on hover */
+  background-color: #218838;
 }
 
-/* Styling the reset button specifically */
 .pause-button.reset {
-  background-color: #dc3545; /* Red background */
+  background-color: #dc3545;
 }
 
-/* Hover effect for the reset button */
 .pause-button.reset:hover {
-  background-color: #c82333; /* Darker red on hover */
+  background-color: #c82333;
 }
 
+/* Updated Start Screen Styles */
+.start-screen {
+  position: fixed; /* Position over the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark background */
+}
 
-  
+.start-text {
+  color: white;
+  font-size: 24px;
+  padding: 20px 40px;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background for text */
+  border-radius: 8px;
+  animation: blink 2s infinite;
+  text-align: center;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

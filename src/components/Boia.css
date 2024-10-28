@@ -1,15 +1,16 @@
 .boia {
-    position: absolute;
-    bottom: 0;
-    width: 30px;
-    height: 30px;
-    background-color: #ffffff; /* Boia color: tomato red */
-    border-radius: 50%; /* Make the boia round */
-    border: 2px solid #000; /* Add a black border for better visibility */
-  }
-  
-  /* Optional: You can add some shadow for a floating effect */
-  .boia {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  }
-  
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/boia.png'); /* Path to your boia image */
+  background-size: cover; /* Ensure the image fills the boia element */
+  background-position: center; /* Center the image within the element */
+  border-radius: 50%; /* Make the boia round */
+  border: 2px solid #000; /* Black border for visibility */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Floating shadow effect */
+}
+
+.boia {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
