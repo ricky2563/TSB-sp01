@@ -31,7 +31,7 @@ const Game: React.FC = () => {
       return;
     }
 
-    if (gameOver) {
+    if (gameOver || paused) {
       if (e.key === 'r' || e.key === 'R') {
         resetGame();
       }
@@ -194,3 +194,4 @@ const Game: React.FC = () => {
 export default Game;
 
 //TODO (DESIGN): MAYBE WATER SP01 ANIMATIONST
+//TODO (DESIGN): ADD SOUND EFFECTS
