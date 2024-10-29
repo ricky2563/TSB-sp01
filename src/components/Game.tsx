@@ -9,7 +9,8 @@ interface BoiaState {
 }
 
 const Game: React.FC = () => {
-  const [gameStarted, setGameStarted] = useState(false); // New state to track if game has started
+  // Main state variables
+  const [gameStarted, setGameStarted] = useState(false); 
   const [sp01Position, setSp01Position] = useState<'top' | 'bottom'>('bottom');
   const [boias, setBoias] = useState<BoiaState[]>([]);
   const [gameOver, setGameOver] = useState(false);
@@ -24,6 +25,7 @@ const Game: React.FC = () => {
   let consecutiveCount = 0;
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    // Handle user keyboard input for game controls and actions
     if (!gameStarted) {
       if (e.key === ' ') {
         setGameStarted(true);
@@ -62,7 +64,7 @@ const Game: React.FC = () => {
   };
 
   const resetGame = () => {
-    setGameStarted(false); // Reset gameStarted to false for the start screen
+    setGameStarted(false);
     setSp01Position('bottom');
     setBoias([]);
     setGameOver(false);
@@ -70,6 +72,7 @@ const Game: React.FC = () => {
     setScore(0);
     setBoiaSpeed(50);
     setSpawnSpeed(1000);
+    setSpacePressed(false);
   };
 
   const spawnBoia = () => {
@@ -91,6 +94,7 @@ const Game: React.FC = () => {
     setBoias((prevBoias) => [...prevBoias, { positionX: -50, positionY }]);
   };
 
+  // Speed up Buoy and spawn rates based on the score
   useEffect(() => {
     if (gameStarted && !gameOver && !paused) {
       if (score % 100 === 0) {
@@ -107,6 +111,7 @@ const Game: React.FC = () => {
     }
   }, [score, gameStarted, gameOver, paused]);
 
+  //Buoy life cycle
   useEffect(() => {
     if (gameStarted && !gameOver && !paused) {
       const interval = setInterval(() => {
@@ -126,6 +131,7 @@ const Game: React.FC = () => {
     }
   }, [spawnSpeed, gameStarted, gameOver, paused]);
 
+  // Increase the score over time when the game is running
   useEffect(() => {
     if (gameStarted && !gameOver && !paused) {
       const scoreInterval = setInterval(() => {
@@ -139,6 +145,7 @@ const Game: React.FC = () => {
     }
   }, [gameStarted, gameOver, maxScore, paused]);
 
+  // Detect collisions between SP01 and any Buoy
   useEffect(() => {
     if (!paused) {
       const detectCollision = () => {
@@ -193,5 +200,3 @@ const Game: React.FC = () => {
 
 export default Game;
 
-//TODO (DESIGN): MAYBE WATER SP01 ANIMATIONST
-//TODO (DESIGN): ADD SOUND EFFECTS

@@ -2,8 +2,8 @@ import React from 'react';
 import './Boia.css';
 
 interface BoiaProps {
-  positionX: number; // posição horizontal da boia
-  positionY: 'top' | 'bottom'; // posição da boia (vertical)
+  positionX: number;
+  positionY: 'top' | 'bottom';
 }
 
 const Boia: React.FC<BoiaProps> = ({ positionX, positionY }) => {

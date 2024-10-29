@@ -29,7 +29,7 @@ body {
   position: relative;
   width: 800px;
   height: 200px;
-  background-image: url('../images/background.jpg'); /* Your rolling background image */
+  background-image: url('../images/background.jpg'); 
   background-size: cover;
   background-repeat: repeat-x;
   overflow: hidden;
@@ -54,7 +54,6 @@ body {
   animation-play-state: paused;
 }
 
-/* Additional styles for game components */
 .game-over {
   position: absolute;
   top: 50%;
@@ -125,9 +124,8 @@ body {
   background-color: #c82333;
 }
 
-/* Updated Start Screen Styles */
 .start-screen {
-  position: fixed; /* Position over the entire viewport */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
@@ -135,14 +133,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark background */
+  background-color: rgba(0, 0, 0, 0.3); 
 }
 
 .start-text {
   color: white;
   font-size: 24px;
   padding: 20px 40px;
-  background-color: rgba(0, 0, 0, 0.8); /* Dark background for text */
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 8px;
   animation: blink 2s infinite;
   text-align: center;
