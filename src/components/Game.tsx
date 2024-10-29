@@ -106,7 +106,7 @@ const Game: React.FC = () => {
   useEffect(() => {
     if (gameStarted && !gameOver && !paused) {
       if (score % 100 === 0) {
-        setSpawnSpeed(Math.max(spawnSpeed - 100, 600));
+        setSpawnSpeed(Math.max(spawnSpeed - 100, 400));
       }
     }
   }, [score, gameStarted, gameOver, paused]);
@@ -160,6 +160,19 @@ const Game: React.FC = () => {
   }, [boias, sp01Position, paused]);
 
   useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setPaused(true); // Pause the game when the window is hidden
+      }
+    };
+  
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
     return () => {
@@ -183,7 +196,7 @@ const Game: React.FC = () => {
           {boias.map((boia, index) => (
             <Boia key={index} positionX={boia.positionX} positionY={boia.positionY} />
           ))}
-          {gameOver && <div className="game-over">Game Over! Pressione R para reiniciar</div>}
+          {gameOver && <div className="game-over">Game Over! Press R to restart</div>}
           {paused && (
             <div className="pause-menu">
               <div className="menu-options">
