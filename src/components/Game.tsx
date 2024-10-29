@@ -161,7 +161,7 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden) {
+      if (document.hidden && gameStarted && !gameOver) {
         setPaused(true); // Pause the game when the window is hidden
       }
     };
@@ -170,7 +170,7 @@ const Game: React.FC = () => {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [gameStarted, gameOver]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
