@@ -8,6 +8,17 @@ interface BoiaState {
   positionY: 'top' | 'bottom';
 }
 
+const GAME_CONFIG = {
+  BUOY_MAX_POSITION_X: 800,
+  POSITION_SWITCH_DISTANCE: { min: 595, max: 675 },
+  INITIAL_BUOY_SPEED: 50,
+  MIN_SPAWN_SPEED: 600,
+  INITIAL_SPAWN_SPEED: 1000,
+  SCORE_INTERVAL: 100,
+  SPAWN_NUMBER_THRESHOLD: 3,
+  BUOY_MOVE_DISTANCE: 10,
+};
+
 const Game: React.FC = () => {
   // Main state variables
   const [gameStarted, setGameStarted] = useState(false); 
@@ -17,8 +28,8 @@ const Game: React.FC = () => {
   const [paused, setPaused] = useState(false);
   const [score, setScore] = useState(0);
   const [maxScore, setMaxScore] = useState(0);
-  const [boiaSpeed, setBoiaSpeed] = useState(50);
-  const [spawnSpeed, setSpawnSpeed] = useState(1000);
+  const [boiaSpeed, setBoiaSpeed] = useState(GAME_CONFIG.INITIAL_BUOY_SPEED);
+  const [spawnSpeed, setSpawnSpeed] = useState(GAME_CONFIG.INITIAL_SPAWN_SPEED);
   const [spacePressed, setSpacePressed] = useState(false);
 
   let lastSpawnPosition: 'top' | 'bottom' | null = null;
@@ -78,7 +89,7 @@ const Game: React.FC = () => {
   const spawnBoia = () => {
     let positionY: 'top' | 'bottom';
 
-    if (lastSpawnPosition && consecutiveCount >= 3) {
+    if (lastSpawnPosition && consecutiveCount >= GAME_CONFIG.SPAWN_NUMBER_THRESHOLD) {
       positionY = lastSpawnPosition === 'top' ? 'bottom' : 'top';
     } else {
       positionY = Math.random() > 0.5 ? 'top' : 'bottom';
@@ -97,15 +108,8 @@ const Game: React.FC = () => {
   // Speed up Buoy and spawn rates based on the score
   useEffect(() => {
     if (gameStarted && !gameOver && !paused) {
-      if (score % 100 === 0) {
+      if (score % GAME_CONFIG.SCORE_INTERVAL === 0) {
         setBoiaSpeed(Math.max(boiaSpeed - 5, 20));
-      }
-    }
-  }, [score, gameStarted, gameOver, paused]);
-
-  useEffect(() => {
-    if (gameStarted && !gameOver && !paused) {
-      if (score % 100 === 0) {
         setSpawnSpeed(Math.max(spawnSpeed - 100, 400));
       }
     }
@@ -116,8 +120,8 @@ const Game: React.FC = () => {
     if (gameStarted && !gameOver && !paused) {
       const interval = setInterval(() => {
         setBoias((prevBoias) =>
-          prevBoias.map((boia) => ({ ...boia, positionX: boia.positionX + 10 }))
-                  .filter((boia) => boia.positionX < 800)
+          prevBoias.map((boia) => ({ ...boia, positionX: boia.positionX + GAME_CONFIG.BUOY_MOVE_DISTANCE }))
+                  .filter((boia) => boia.positionX < GAME_CONFIG.BUOY_MAX_POSITION_X)
         );
       }, boiaSpeed);
       return () => clearInterval(interval);
@@ -150,7 +154,8 @@ const Game: React.FC = () => {
     if (!paused) {
       const detectCollision = () => {
         boias.forEach((boia) => {
-          if (boia.positionX < 675 && boia.positionX > 625 && sp01Position === boia.positionY) {
+          if (boia.positionX < GAME_CONFIG.POSITION_SWITCH_DISTANCE.max && 
+            boia.positionX > GAME_CONFIG.POSITION_SWITCH_DISTANCE.min && sp01Position === boia.positionY) {
             setGameOver(true);
           }
         });
