@@ -3,11 +3,13 @@ import SP01 from './SP01';
 import Boia from './Boia';
 import './Game.css';
 
+// Define the BoiaState interface representing each buoy's position
 interface BoiaState {
   positionX: number;
   positionY: 'top' | 'bottom';
 }
 
+// Game configuration constants
 const GAME_CONFIG = {
   BUOY_MAX_POSITION_X: 800,
   POSITION_SWITCH_DISTANCE: { min: 595, max: 675 },
@@ -35,8 +37,9 @@ const Game: React.FC = () => {
   let lastSpawnPosition: 'top' | 'bottom' | null = null;
   let consecutiveCount = 0;
 
+  // Handle user keyboard input for game controls and actions
   const handleKeyDown = (e: KeyboardEvent) => {
-    // Handle user keyboard input for game controls and actions
+  
     if (!gameStarted) {
       if (e.key === ' ') {
         setGameStarted(true);
@@ -74,6 +77,7 @@ const Game: React.FC = () => {
     }
   };
 
+  // Reset game state and variables
   const resetGame = () => {
     setGameStarted(false);
     setSp01Position('bottom');
@@ -86,15 +90,18 @@ const Game: React.FC = () => {
     setSpacePressed(false);
   };
 
+  // Spawn new buoys in either 'top' or 'bottom' position
   const spawnBoia = () => {
     let positionY: 'top' | 'bottom';
 
+    // Alternate buoy position if consecutive spawn limit is reached
     if (lastSpawnPosition && consecutiveCount >= GAME_CONFIG.SPAWN_NUMBER_THRESHOLD) {
       positionY = lastSpawnPosition === 'top' ? 'bottom' : 'top';
     } else {
       positionY = Math.random() > 0.5 ? 'top' : 'bottom';
     }
 
+    // Track last position and consecutive count
     if (positionY === lastSpawnPosition) {
       consecutiveCount++;
     } else {
@@ -115,7 +122,7 @@ const Game: React.FC = () => {
     }
   }, [score, gameStarted, gameOver, paused]);
 
-  //Buoy life cycle
+  // Update buoy positions at regular intervals
   useEffect(() => {
     if (gameStarted && !gameOver && !paused) {
       const interval = setInterval(() => {
@@ -128,6 +135,7 @@ const Game: React.FC = () => {
     }
   }, [boiaSpeed, gameStarted, gameOver, paused]);
 
+  // Regularly spawn buoys based on current spawn speed
   useEffect(() => {
     if (gameStarted && !gameOver && !paused) {
       const spawnInterval = setInterval(spawnBoia, spawnSpeed);
@@ -164,10 +172,11 @@ const Game: React.FC = () => {
     }
   }, [boias, sp01Position, paused]);
 
+  // Pause game if window visibility changes (e.g., tab change)
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden && gameStarted && !gameOver) {
-        setPaused(true); // Pause the game when the window is hidden
+        setPaused(true);
       }
     };
   
@@ -177,6 +186,7 @@ const Game: React.FC = () => {
     };
   }, [gameStarted, gameOver]);
 
+  // Attach key event listeners for gameplay controls
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
