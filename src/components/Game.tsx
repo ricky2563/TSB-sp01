@@ -203,7 +203,12 @@ const Game: React.FC = () => {
         <div className="score">Score: {score}</div>
       </div>
       {gameStarted && !gameOver && (
-      <button className="pause-icon" onClick={() => setPaused(!paused)} />
+      <button className="pause-icon"
+          onClick={(e) =>{
+            setPaused(!paused);
+            (e.target as HTMLButtonElement).blur();
+          }}
+      />
       )}
       {!gameStarted && (
         <div className="start-screen">
