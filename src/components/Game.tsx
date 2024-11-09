@@ -198,8 +198,13 @@ const Game: React.FC = () => {
 
   return (
     <div className="score-border">
-      <div className="max-score">High Score: {maxScore}</div>
-      <div className="score">Score: {score}</div>
+      <div className="score-container">
+        <div className="max-score">High Score: {maxScore}</div>
+        <div className="score">Score: {score}</div>
+      </div>
+      {gameStarted && !gameOver && (
+      <button className="pause-icon" onClick={() => setPaused(!paused)} />
+      )}
       {!gameStarted && (
         <div className="start-screen">
           <p className="start-text">Press Space to Start</p>
