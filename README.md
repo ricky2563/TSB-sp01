@@ -61,5 +61,5 @@ Enjoy the game, and happy coding!
 
 ## Game Deployed At
 
-Check out the live game here: [Deployed Game Link](https://web.tecnico.ulisboa.pt/~ist1103555)
+Check out the live game here: [Deployed Game Link](https://web.tecnico.ulisboa.pt/ist1103555/)
 
