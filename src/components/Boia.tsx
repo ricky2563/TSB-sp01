@@ -16,11 +16,6 @@ interface BoiaState {
   positionY: 'top' | 'bottom';
 }
 
-// Interface for individual buoy properties
-interface BoiaProps {
-  positionX: number;
-  positionY: 'top' | 'bottom';
-}
 
 export const useBoias = (gameStarted: boolean, gameOver: boolean, paused: boolean) => {
   const [boias, setBoias] = useState<BoiaState[]>([]);
@@ -91,7 +86,7 @@ export const useBoias = (gameStarted: boolean, gameOver: boolean, paused: boolea
 };
 
 // Boia component for rendering individual buoys
-const Boia: React.FC<BoiaProps> = ({ positionX, positionY }) => (
+const Boia: React.FC<BoiaState> = ({ positionX, positionY }) => (
   <div
     className="boia"
     style={{
