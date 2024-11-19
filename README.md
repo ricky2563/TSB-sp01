@@ -26,6 +26,10 @@ This is a simple React-based game where a character (SP01) moves between two lan
 
 In the project directory, you can run:
 
+### `npm install`
+
+Install all necessary dependencies.
+
 ### `npm start`
 
 Runs the app in development mode.\
